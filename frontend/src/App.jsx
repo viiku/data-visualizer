@@ -1,16 +1,28 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Register from './components/Auth/Register';
+import Login from './components/Auth/Login';
+import Profile from './components/Auth/Profile';
+import FileUpload from './components/DataIngestion/FileUpload';
+import Visualization from './components/Visualization/Visualization';
+import Navbar from './components/Navbar';
 import './App.css'
 
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    <h1 className="text-3xl font-bold underline">
-      Frontend initalization!!!
-    </h1>
-  )
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/upload" element={<FileUpload />} />
+        <Route path="/visualization" element={<Visualization />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

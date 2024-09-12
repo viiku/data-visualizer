@@ -1,13 +1,12 @@
 from django.shortcuts import render
-
-# Create your views here.
-# users/views.py
 from rest_framework import generics, permissions
 from rest_framework.response import Response
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from .serializers import UserRegistrationSerializer, UserDetailSerializer
 from rest_framework.authtoken.models import Token
+
+# Create your views here.
 
 User = get_user_model()
 
