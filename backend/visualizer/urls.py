@@ -27,5 +27,8 @@ urlpatterns = [
     path('api/visualization/', include('visualization.urls')),  # Including the visualization app URLs
 
     # api
-    path('api/', include('api.urls')),  # Include the API app URLs   
+    path('api/', include('api.urls')),  # Include the API app URLs 
+    
+    # users
+    path('users/', include('users.urls')), #Include the users app urls  
 ]
