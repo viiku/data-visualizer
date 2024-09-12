@@ -19,16 +19,19 @@ from django.urls import path, include
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    
-    # ingestion 
-    path('api/ingestion/', include('data_ingestion.urls')),  # Including the ingestion app URLs
-    
-    # visualization
-    path('api/visualization/', include('visualization.urls')),  # Including the visualization app URLs
 
-    # api
-    path('api/', include('api.urls')),  # Include the API app URLs 
+    # Including the ingestion app URLs
+    path('api/ingestion/', include('data_ingestion.urls')),
     
-    # users
-    path('users/', include('users.urls')), #Include the users app urls  
+    # Including the visualization app URLs
+    path('api/visualization/', include('visualization.urls')),
+
+    # Include the API app URLs
+    path('api/', include('api.urls')),
+
+    #Include the users app urls
+    path('users/', include('users.urls')),
+
+    #Include the dashboard app urls
+    path('dashboard/', include('dashboard.urls'))
 ]

@@ -5,6 +5,7 @@ import Login from './components/Auth/Login';
 import Profile from './components/Auth/Profile';
 import FileUpload from './components/DataIngestion/FileUpload';
 import Visualization from './components/Visualization/Visualization';
+import Dashboard from './components/Dashboard';
 import Navbar from './components/Navbar';
 import './App.css'
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/upload" element={<FileUpload />} />
         <Route path="/visualization" element={<Visualization />} />
       </Routes>

@@ -44,6 +44,14 @@ INSTALLED_APPS = [
     'visualization',
     'api',
     'users',
+    'dashboard',
+    'data_processing',
+    'maps',
+    'notification',
+    # 'profiles'
+    'reports',
+    'uploads',
+    'admin_tools'
 ]
 
 MIDDLEWARE = [
