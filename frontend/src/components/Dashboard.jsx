@@ -4,19 +4,19 @@ import { Bar, Line } from 'react-chartjs-2'; // Example using chart.js
 import 'chart.js/auto'; // Import chart.js dependencies
 
 function Dashboard() {
-  const [data, setData] = useState(null); // State to hold data fetched from the backend
+  const [data, setStats] = useState(null); // State to hold data fetched from the backend
   const [loading, setLoading] = useState(true); // State to manage loading
-
-  // Fetch dashboard data on component mount
-  const [stats, setStats] = useState([]);
+  const [file, setFile] = useState(null); // State to hold the selected file
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await API.get('/dashboard/stats/');
-        setStats(response.data.stats);
+        const response = await API.get('/dashboard/stats/'); 
+        setStats(response.data.stats); // Ensure 'stat' is the right state for holding fetched stat
+        setLoading(false)
       } catch (error) {
         console.error('Error fetching dashboard stats:', error);
+        setLoading(false); // Set loading to false even if there is an error
         alert('Failed to load dashboard data.');
       }
     };
@@ -24,6 +24,36 @@ function Dashboard() {
     fetchStats();
   }, []);
 
+  // Handle file upload
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]); // Update file state with the selected file
+  };
+
+  const handleFileUpload = async () => {
+    if (!file) {
+      alert('Please select a file first.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      await API.post('/api/ingestion/upload/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem('token')}`, // Add the token for authenticated upload
+        },
+      });
+      alert('File uploaded successfully!');
+      setLoading
+    } catch (error) {
+      console.error('File upload failed:', error);
+      alert('File upload failed.');
+    }
+  };
+  
+  
   if (loading) {
     return <div>Loading...</div>; // Show a loading message while data is fetched
   }
@@ -56,6 +86,22 @@ function Dashboard() {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
+
+      {/* File Upload Section */}
+      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+        <h2 className="text-xl font-semibold mb-4">Upload File</h2>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          className="mb-4"
+        />
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          onClick={handleFileUpload}
+        >
+          Upload
+        </button>
+      </div>
 
       {/* Cards Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
