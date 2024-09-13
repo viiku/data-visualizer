@@ -14,7 +14,7 @@ function Login() {
       const response = await API.post('/users/login/', formData); // Make API request to login endpoint
       localStorage.setItem('token', response.data.token); // Save token in local storage
       alert('Login successful!');
-      navigate('/profile'); // Redirect to profile page on successful login
+      navigate('/dashboard'); // Redirect to dashboard page on successful login
     } catch (error) {
       console.error(error);
       alert('Invalid credentials'); // Display error if login fails
@@ -36,6 +36,7 @@ function Login() {
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)} // Update username state required
+          required
         />
       </div>
       <div className="mb-6">
